@@ -255,8 +255,11 @@ def generate_forecast(symbol: str, window_days: int = 7) -> dict:
     prediction = None
 
     # 3a. Check for LSTM model (best for some tickers like TSLA)
-    from backend.ml.lstm_model import predict_lstm
-    lstm_result = predict_lstm(symbol)
+    try:
+        from backend.ml.lstm_model import predict_lstm
+        lstm_result = predict_lstm(symbol)
+    except ImportError:
+        lstm_result = None
     if lstm_result is not None:
         h = lstm_result["horizon"]  # e.g. "t3"
         if prediction is None:

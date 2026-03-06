@@ -225,28 +225,6 @@ function App() {
       <header className="app-header">
         <div className="header-left">
           <h1>PokieTicker</h1>
-          {selectedRange ? (
-            <div className="header-ohlc">
-              <span className="ohlc-date">{selectedRange.startDate} ~ {selectedRange.endDate}</span>
-              <span className="range-badge">Range Selected</span>
-            </div>
-          ) : hoveredOhlc ? (
-            <div className="header-ohlc">
-              <span className="ohlc-date">{hoveredOhlc.date}</span>
-              <span className="ohlc-label">O</span>
-              <span className="ohlc-val">${hoveredOhlc.open.toFixed(2)}</span>
-              <span className="ohlc-label">H</span>
-              <span className="ohlc-val">${hoveredOhlc.high.toFixed(2)}</span>
-              <span className="ohlc-label">L</span>
-              <span className="ohlc-val">${hoveredOhlc.low.toFixed(2)}</span>
-              <span className="ohlc-label">C</span>
-              <span className="ohlc-val">${hoveredOhlc.close.toFixed(2)}</span>
-              <span className={`ohlc-change ${hoveredOhlc.change >= 0 ? 'up' : 'down'}`}>
-                {hoveredOhlc.change >= 0 ? '+' : ''}
-                {hoveredOhlc.change.toFixed(2)}%
-              </span>
-            </div>
-          ) : null}
         </div>
         <StockSelector
           activeTickers={activeTickers}
@@ -254,6 +232,28 @@ function App() {
           onSelect={handleSelectSymbol}
           onAdd={handleAddTicker}
         />
+        {selectedRange ? (
+          <div className="header-ohlc">
+            <span className="ohlc-date">{selectedRange.startDate} ~ {selectedRange.endDate}</span>
+            <span className="range-badge">Range Selected</span>
+          </div>
+        ) : hoveredOhlc ? (
+          <div className="header-ohlc">
+            <span className="ohlc-date">{hoveredOhlc.date}</span>
+            <span className="ohlc-label">O</span>
+            <span className="ohlc-val">${hoveredOhlc.open.toFixed(2)}</span>
+            <span className="ohlc-label">H</span>
+            <span className="ohlc-val">${hoveredOhlc.high.toFixed(2)}</span>
+            <span className="ohlc-label">L</span>
+            <span className="ohlc-val">${hoveredOhlc.low.toFixed(2)}</span>
+            <span className="ohlc-label">C</span>
+            <span className="ohlc-val">${hoveredOhlc.close.toFixed(2)}</span>
+            <span className={`ohlc-change ${hoveredOhlc.change >= 0 ? 'up' : 'down'}`}>
+              {hoveredOhlc.change >= 0 ? '+' : ''}
+              {hoveredOhlc.change.toFixed(2)}%
+            </span>
+          </div>
+        ) : null}
       </header>
 
       <main className="app-main">

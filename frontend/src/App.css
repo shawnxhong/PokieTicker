@@ -21,10 +21,10 @@ body {
 .app-header {
   background: #1a1d29;
   border-bottom: 1px solid #2a2d3a;
-  padding: 6px 16px;
+  padding: 4px 14px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   flex-shrink: 0;
   min-height: 0;
 }
@@ -37,7 +37,7 @@ body {
 }
 
 .app-header h1 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.5px;
@@ -46,9 +46,12 @@ body {
 .header-ohlc {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 15px;
+  gap: 5px;
+  font-size: 13px;
   font-family: 'SF Mono', 'Fira Code', monospace;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .ohlc-date {
@@ -88,6 +91,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 /* Current ticker button */
@@ -271,7 +275,7 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 380px;
-  grid-template-rows: 55vh 1fr;
+  grid-template-rows: 42vh 1fr;
   grid-template-areas:
     "chart      prediction"
     "news       prediction";
@@ -291,8 +295,10 @@ body {
 .prediction-area {
   grid-area: prediction;
   overflow-y: auto;
+  overflow-x: hidden;
   border-left: 1px solid #2a2d3a;
   min-height: 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -1031,6 +1037,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .pred-expanded {
@@ -1192,6 +1200,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-bottom: 10px;
+  min-width: 0;
 }
 
 .fc-pred-card {
@@ -1199,6 +1208,8 @@ body {
   border-radius: 8px;
   padding: 10px 12px;
   border-left: 3px solid #3a3d4a;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .fc-pred-card.up { border-left-color: #00e676; }
@@ -1264,8 +1275,9 @@ body {
 }
 
 .fc-driver-name {
-  width: 100px;
-  font-size: 12px;
+  width: 80px;
+  flex-shrink: 0;
+  font-size: 11px;
   color: #777;
   white-space: nowrap;
   overflow: hidden;
@@ -1291,12 +1303,14 @@ body {
 .fc-driver-bar-fill.down { background: #ff5252; }
 
 .fc-driver-val {
-  width: 80px;
+  flex-shrink: 0;
   text-align: right;
-  font-size: 11px;
+  font-size: 10px;
   color: #666;
   font-family: 'SF Mono', 'Fira Code', monospace;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Forecast section block (7D / 30D) */
@@ -2287,36 +2301,33 @@ body {
 /* ===== Responsive — Tablet ===== */
 @media (max-width: 900px) {
   .app-main {
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: unset;
-    grid-template-rows: unset;
-    grid-template-areas: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 40vh 1fr;
+    grid-template-areas:
+      "chart      chart"
+      "news       prediction";
   }
   .chart-area {
     border-right: none;
     border-bottom: 1px solid #2a2d3a;
-    height: 40vh;
-    flex: none;
   }
   .news-area {
-    width: 100%;
-    flex: 1;
     border-top: none;
-    border-right: none;
+    border-right: 1px solid #2a2d3a;
+    min-height: 0;
   }
   .prediction-area {
-    order: 3;
-    max-height: 50vh;
     border-left: none;
-    border-top: 1px solid #2a2d3a;
+    border-top: none;
     overflow-y: auto;
+    min-height: 0;
   }
   .header-ohlc {
     display: none;
   }
   .app-header h1 {
-    font-size: 22px;
+    font-size: 18px;
   }
   .ticker-tabs {
     max-width: 300px;
@@ -2418,12 +2429,20 @@ body {
 
 /* ===== Responsive — Phone ===== */
 @media (max-width: 480px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 35vh 1fr auto;
+    grid-template-areas:
+      "chart"
+      "news"
+      "prediction";
+  }
   .app-header {
-    padding: 6px 10px;
-    gap: 8px;
+    padding: 4px 8px;
+    gap: 6px;
   }
   .app-header h1 {
-    font-size: 20px;
+    font-size: 16px;
   }
   .ticker-tabs {
     max-width: 200px;
@@ -2431,16 +2450,17 @@ body {
   }
   .ticker-tab {
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 13px;
   }
   .search-wrapper {
-    width: 140px;
+    width: 120px;
   }
   .search-wrapper input {
-    font-size: 14px;
+    font-size: 13px;
   }
-  .chart-area {
-    height: 35vh;
+  .news-area {
+    border-right: none;
+    border-bottom: 1px solid #2a2d3a;
   }
   .prediction-area {
     max-height: 40vh;
