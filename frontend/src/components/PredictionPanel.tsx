@@ -189,11 +189,7 @@ export default function PredictionPanel({ symbol }: Props) {
   const [forecast30, setForecast30] = useState<Forecast | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [expanded, setExpanded] = useState(() =>
-    typeof globalThis.matchMedia === 'function'
-      ? globalThis.matchMedia('(min-width: 900px)').matches
-      : false
-  );
+  const [expanded, setExpanded] = useState(true);
 
   // Deep analysis state
   const [deepLoading, setDeepLoading] = useState<string | null>(null);

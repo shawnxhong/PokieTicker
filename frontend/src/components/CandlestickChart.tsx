@@ -98,7 +98,7 @@ export default function CandlestickChart({ symbol, lockedNewsId, highlightedArti
   const lockedNewsIdRef = useRef<string | null>(null);
   const highlightedIdsRef = useRef<Set<string> | null>(null);
   const highlightColorRef = useRef<string | null>(null);
-  const marginRef = useRef({ top: 20, right: 60, bottom: 30, left: 70 });
+  const marginRef = useRef({ top: 16, right: 40, bottom: 24, left: 48 });
 
   // Keep refs in sync with props
   useEffect(() => {
@@ -270,14 +270,14 @@ export default function CandlestickChart({ symbol, lockedNewsId, highlightedArti
       .attr('transform', `translate(0,${height})`)
       .call(d3.axisBottom(x).ticks(8).tickFormat(d3.timeFormat('%b %y') as any))
       .selectAll('text')
-      .style('font-size', '15px')
+      .style('font-size', '12px')
       .style('fill', '#555');
 
     // Y Axis
     g.append('g')
-      .call(d3.axisLeft(y).ticks(8).tickFormat((d) => `$${Number(d).toFixed(0)}`))
+      .call(d3.axisLeft(y).ticks(6).tickFormat((d) => `$${Number(d).toFixed(0)}`))
       .selectAll('text')
-      .style('font-size', '15px')
+      .style('font-size', '12px')
       .style('fill', '#555');
 
     g.selectAll('.domain').style('stroke', '#1a2030');
@@ -393,13 +393,13 @@ export default function CandlestickChart({ symbol, lockedNewsId, highlightedArti
     priceLabel.append('rect')
       .attr('fill', '#1a1e2e')
       .attr('rx', 3)
-      .attr('width', 58)
-      .attr('height', 20);
+      .attr('width', 46)
+      .attr('height', 18);
     priceLabel.append('text')
       .attr('fill', '#aaa')
-      .attr('font-size', '13px')
+      .attr('font-size', '12px')
       .attr('text-anchor', 'middle')
-      .attr('dy', '14px');
+      .attr('dy', '13px');
 
     // Date label on X axis
     const dateLabel = g.append('g').style('display', 'none');
@@ -467,7 +467,7 @@ export default function CandlestickChart({ symbol, lockedNewsId, highlightedArti
     // D3 Brush for range selection
     let brushMoving = false;
     const brush = d3.brushX<unknown>()
-      .extent([[0, 0], [width, height]])
+      .extent([[0, 0], [width, height + margin.bottom]])
       .on('end', function (event) {
         if (brushMoving) return; // guard against re-entrancy from brush.move
         if (!event.selection) {
@@ -532,9 +532,9 @@ export default function CandlestickChart({ symbol, lockedNewsId, highlightedArti
 
         // Price label
         priceLabel.style('display', null)
-          .attr('transform', `translate(${-58},${my - 10})`);
+          .attr('transform', `translate(${-46},${my - 9})`);
         priceLabel.select('text')
-          .attr('x', 29)
+          .attr('x', 23)
           .text(`$${priceAtY.toFixed(2)}`);
 
         // Date label
